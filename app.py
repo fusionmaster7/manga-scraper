@@ -1,9 +1,14 @@
-from manga import Manga
-from chapter import Chapter
+import flask
+import controllers
+
+app = flask.Flask(__name__)
+app.config['DEBUG'] = True
 
 
-url = 'https://mangakakalot.com/manga/fc922780'
-my_manga = Manga('The Story of a Waitress and Her Customer', url=url)
+@app.route('/', methods=['GET'])
+def get_manga():
+    res = controllers.get_manga()
+    return res
 
-my_manga.gen_list()
-my_manga.chapters[3].print_pages()
+
+app.run()
