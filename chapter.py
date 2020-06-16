@@ -17,6 +17,5 @@ class Chapter():
         for page in pages:
             self.image_links.append(page['src'])
 
-    def create_json(self):
-        my_json = json.dumps(self.__dict__)
-        print(my_json)
+    def __repr__(self):
+        return json.dumps(self.__dict__)
