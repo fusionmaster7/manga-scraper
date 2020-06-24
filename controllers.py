@@ -12,6 +12,17 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
+def get_all_mangas():
+    mangas = db.collection(u'manga').stream()
+    manga_list = []
+    for manga in mangas:
+        manga_name = manga.to_dict()['name']
+        manga_url = manga.to_dict()['url']
+        my_manga = {"name": manga_name, "url": manga_url}
+        manga_list.append(my_manga)
+    return jsonify(manga_list)
+
+
 def get_manga(manga_name):
     doc_ref = db.collection(u'manga').document(manga_name)
     doc = doc_ref.get()
